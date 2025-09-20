@@ -1,7 +1,7 @@
 ## TO START THE PROJECT RUN:
 
 ```bash
-    uvicorn app:app --reload --port 8000
+    uvicorn main:app --reload --port 8000
 ```
 
 ## API status
