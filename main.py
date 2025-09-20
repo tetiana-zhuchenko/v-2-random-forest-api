@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from scipy.sparse import hstack, csr_matrix
 from contextlib import asynccontextmanager
-
+from fastapi.middleware.cors import CORSMiddleware
 
 # Глобальні змінні для моделі та компонентів
 model = None
@@ -64,6 +64,14 @@ async def lifespan(app: FastAPI):
     print("Всі ресурси звільнено")
 
 app = FastAPI(title="Restaurant Review Sentiment API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 
 def handle_negations(text):
     """Замінює 'не + позитивне_слово' на відповідне негативне слово."""
